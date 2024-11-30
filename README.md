@@ -1,4 +1,3 @@
-```markdown
 # Gasoptics
 
 Gasoptics is a Python library for calculating thermodynamic and transport properties of gases. It includes functions for calculating specific heat, viscosity, thermal conductivity, and other properties using both ideal and real gas models.
@@ -19,7 +18,7 @@ To install **Gasoptics**, you can clone the repository or install it directly fr
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/gasoptics.git
+   git clone https://github.com/karimialii/gasoptics.git
    ```
 
 2. Navigate into the project directory:
@@ -34,9 +33,9 @@ To install **Gasoptics**, you can clone the repository or install it directly fr
    pip install .
    ```
 
-### Option 2: Install via PyPI (Coming soon)
+### Option 2: Install via PyPI
 
-Once the package is published on PyPI, you can install it via pip:
+You can install the package via pip:
 
 ```bash
 pip install gasoptics
@@ -46,8 +45,6 @@ pip install gasoptics
 
 - Python 3.x
 - NumPy
-- Matplotlib (for plotting)
-- CoolProp (for fluid properties)
 
 ## Usage
 
@@ -72,18 +69,6 @@ k = calculate_thermal_conductivity(T)
 print(f"Thermal Conductivity: {k} W/m·K")
 ```
 
-### State of the Gas (Vapor, Liquid, Saturated)
-
-You can also determine if the gas is in the vapor, liquid, or saturated state using the `get_air_state` function:
-
-```python
-P = 101325  # Pressure in Pascals
-T = 300     # Temperature in Kelvin
-
-state = get_air_state(P, T)
-print(f"The state of the gas is: {state}")
-```
-
 ## Tests
 
 The package includes tests for all the core functions to ensure correctness. To run the tests, use the following command:
@@ -106,11 +91,6 @@ Contributions are welcome! Please fork the repository and submit pull requests f
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
-
-- This package relies on **CoolProp** for fluid property calculations. 
-- Thanks to the contributors and maintainers of **NumPy** and **Matplotlib**.
-```
 
 ### How to Use:
 1. **Clone the Repository**: You can clone the repository using the provided `git clone` command.
