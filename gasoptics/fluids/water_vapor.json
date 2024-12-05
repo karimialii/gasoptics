@@ -1,0 +1,12 @@
+{
+    "name": "water_vapor",
+    "molecular_weight": 18.015,
+    "specific_heats": {
+        "A": 32.24,
+        "B": 0.1923e-2,
+        "C": 1.055e-5,
+        "D": -3.595e-9
+    },
+    "critical_temperature": 647.1,
+    "critical_pressure": 22064000
+}
