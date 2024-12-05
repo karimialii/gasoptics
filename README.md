@@ -94,7 +94,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### How to Use:
 1. **Clone the Repository**: You can clone the repository using the provided `git clone` command.
-2. **Install Dependencies**: Make sure you have all dependencies like NumPy, Matplotlib, and CoolProp installed.
+2. **Install Dependencies**: Make sure you have NumPy installed.
 3. **Usage Example**: The README includes an example for using the library's functions for calculating properties like specific heat, viscosity, and thermal conductivity.
 4. **Running Tests**: Run tests using `pytest` to ensure that the library works as expected.
 5. **Contributing**: The contributing section provides instructions for how others can contribute to the project.
