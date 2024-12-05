@@ -1,104 +1,131 @@
 # Gasoptics
 
-Gasoptics is a Python library for calculating thermodynamic and transport properties of gases. It includes functions for calculating specific heat, viscosity, thermal conductivity, and other properties using both ideal and real gas models.
+Gasoptics is a Python library for calculating thermodynamic and transport properties of gases, now updated to include enhanced functionality for real gas behavior, humid air modeling, and more robust computational methods.
+
+## What's New in Version 2.0
+
+- **Humid Air Modeling**: Added functions to calculate thermodynamic properties (e.g., \( C_p \), \( C_v \), and density) for humid air, including relative humidity considerations.
+- **Enhanced Dynamic Viscosity**: Improved viscosity calculations using Sutherland’s law and empirical pressure corrections for high-pressure conditions.
+- **Real Gas Handling**: Extended support for real gas properties using Redlich-Kwong and Peng-Robinson equations of state.
+- **Improved Testing**: Expanded test coverage and added comparison with reference datasets.
+- **Refactored Codebase**: Organized functions into specific modules for easier maintenance and scalability.
+- **New Property Calculations**:
+  - Specific Heat (\( C_p \), \( C_v \))
+  - Ratio of Specific Heats (\( \gamma \))
+  - Density
+  - Dynamic Viscosity
+  - Entropy and Enthalpy for real and ideal gases
 
 ## Features
 
-- **Thermodynamics**: Includes functions for calculating specific heat, enthalpy, entropy, and more.
-- **Transport Properties**: Includes functions for calculating viscosity, thermal conductivity, and kinematic viscosity.
-- **Equations of State**: Includes Peng-Robinson and other equations for gas density calculations.
-- **Utility Functions**: Helper functions for various thermodynamic and transport property calculations.
+- **Thermodynamic Properties**:
+  - Specific heat (\( C_p, C_v \)), enthalpy, entropy, and \(\gamma\) for real and humid air.
+- **Transport Properties**:
+  - Viscosity and thermal conductivity calculations using empirical and theoretical models.
+- **Equations of State**:
+  - Support for Redlich-Kwong and Peng-Robinson EOS.
+- **Modular Design**:
+  - Organized codebase with dedicated modules for each property.
+- **Utility Functions**:
+  - Helper functions for handling gas constants and property lookups.
 
 ## Installation
 
-To install **Gasoptics**, you can clone the repository or install it directly from a source distribution.
-
-### Option 1: Install from source
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/karimialii/gasoptics.git
-   ```
-
-2. Navigate into the project directory:
-
-   ```bash
-   cd gasoptics
-   ```
-
-3. Install the package using pip:
-
-   ```bash
-   pip install .
-   ```
-
-### Option 2: Install via PyPI
-
-You can install the package via pip:
-
+### Option 1: Install from PyPI
 ```bash
 pip install gasoptics
 ```
+
+### Option 2: Install from Source
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/karimialii/gasoptics.git
+   ```
+2. Navigate into the project directory:
+   ```bash
+   cd gasoptics
+   ```
+3. Install the package:
+   ```bash
+   pip install .
+   ```
 
 ## Requirements
 
 - Python 3.x
 - NumPy
+- Matplotlib
 
 ## Usage
 
-Here’s an example of how to use the library to calculate thermodynamic and transport properties:
-
+### Example: Calculating Thermodynamic Properties
 ```python
-from gasoptics import calculate_specific_heat_cp, calculate_dynamic_viscosity, calculate_thermal_conductivity
+from gasoptics.thermodynamics import calculate_cp, calculate_cv, calculate_gamma
+from gasoptics.transport import calculate_dynamic_viscosity
 
-# Define temperature in Kelvin
-T = 300  # K
+# Define conditions
+T = 300  # Temperature in Kelvin
+P = 101325  # Pressure in Pascals
+RH = 0.5  # Relative Humidity (50%)
 
-# Calculate specific heat at constant pressure (Cp)
-Cp = calculate_specific_heat_cp(T)
-print(f"Specific Heat at Constant Pressure (Cp): {Cp} J/kg·K")
+# Calculate specific heat at constant pressure
+cp = calculate_cp(T, P, RH=RH)
+print(f"Specific Heat (Cp): {cp} J/kg·K")
+
+# Calculate specific heat at constant volume
+cv = calculate_cv(T, P, RH=RH)
+print(f"Specific Heat (Cv): {cv} J/kg·K")
+
+# Calculate ratio of specific heats (gamma)
+gamma = calculate_gamma(T, P, RH=RH)
+print(f"Gamma (Cp/Cv): {gamma}")
 
 # Calculate dynamic viscosity
-mu = calculate_dynamic_viscosity(T)
+mu = calculate_dynamic_viscosity(T, P)
 print(f"Dynamic Viscosity: {mu} Pa·s")
+```
 
-# Calculate thermal conductivity
-k = calculate_thermal_conductivity(T)
-print(f"Thermal Conductivity: {k} W/m·K")
+### Example: Calculating Density
+```python
+from gasoptics.thermodynamics import calculate_density
+
+# Conditions
+T = 300  # Kelvin
+P = 101325  # Pascals
+RH = 0.8  # Relative Humidity (80%)
+
+# Calculate density for humid air
+rho = calculate_density(T, P, RH=RH)
+print(f"Density of Humid Air: {rho:.3f} kg/m³")
 ```
 
 ## Tests
 
-The package includes tests for all the core functions to ensure correctness. To run the tests, use the following command:
-
+Run the test suite to validate functionality:
 ```bash
 pytest tests/
 ```
 
 ## Contributing
 
-Contributions are welcome! Please fork the repository and submit pull requests for any improvements or bug fixes.
-
+Contributions are welcome! Follow these steps to contribute:
 1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature`).
-3. Make your changes and commit (`git commit -am 'Add new feature'`).
-4. Push to your branch (`git push origin feature/your-feature`).
+2. Create a new branch:
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+3. Make your changes and commit:
+   ```bash
+   git commit -am "Add new feature"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin feature/your-feature
+   ```
 5. Submit a pull request.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-
-### How to Use:
-1. **Clone the Repository**: You can clone the repository using the provided `git clone` command.
-2. **Install Dependencies**: Make sure you have NumPy installed.
-3. **Usage Example**: The README includes an example for using the library's functions for calculating properties like specific heat, viscosity, and thermal conductivity.
-4. **Running Tests**: Run tests using `pytest` to ensure that the library works as expected.
-5. **Contributing**: The contributing section provides instructions for how others can contribute to the project.
-
-This README will serve as a guide for anyone looking to use or contribute to the `gasoptics` library.
-
-Let me know if you need any modifications!
+---
