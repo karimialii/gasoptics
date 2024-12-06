@@ -8,5 +8,14 @@
         "D": -3.595e-9
     },
     "critical_temperature": 647.1,
-    "critical_pressure": 22064000
+    "critical_pressure": 22064000,
+    "sutherland_vis_reference_temperature": 350,
+    "sutherland_vis_reference": 1.12e-5,
+    "sutherland_vis_constant": 1064,
+    "sutherland_cond_reference_temperature": 300,
+    "sutherland_cond_reference": 0.0181,
+    "sutherland_cond_constant": 2200
 }
+
+
+  

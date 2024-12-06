@@ -1,33 +1,43 @@
-# Gasoptics
+---
 
-Gasoptics is a Python library for calculating thermodynamic and transport properties of gases, now updated to include enhanced functionality for real gas behavior, humid air modeling, and more robust computational methods.
+# GasOptics
 
-## What's New in Version 2.0
+GasOptics is a Python library designed to calculate thermodynamic and transport properties of gases. With the introduction of the `GasProperties` class, the library now provides a streamlined interface for handling various gas properties under different conditions, along with robust unit conversion capabilities.
 
-- **Humid Air Modeling**: Added functions to calculate thermodynamic properties (e.g., \( C_p \), \( C_v \), and density) for humid air, including relative humidity considerations.
-- **Enhanced Dynamic Viscosity**: Improved viscosity calculations using Sutherland’s law and empirical pressure corrections for high-pressure conditions.
-- **Real Gas Handling**: Extended support for real gas properties using Redlich-Kwong and Peng-Robinson equations of state.
-- **Improved Testing**: Expanded test coverage and added comparison with reference datasets.
-- **Refactored Codebase**: Organized functions into specific modules for easier maintenance and scalability.
-- **New Property Calculations**:
-  - Specific Heat (\( C_p \), \( C_v \))
-  - Ratio of Specific Heats (\( \gamma \))
-  - Density
-  - Dynamic Viscosity
-  - Entropy and Enthalpy for real and ideal gases
+---
+
+## What's New in Version 0.3.0
+
+- **The `GasProperties` Class**:
+  - Unified interface for calculating gas properties.
+  - Dynamic updates to conditions without reinitialization.
+  - Support for unit conversions using `UnitConverter`.
+- **Thermal Conductivity Calculations**:
+  - Added support for thermal conductivity (`λ`) calculations for gases and humid air.
+- **Enhanced Unit Handling**:
+  - Seamless input and output unit conversion for temperature, pressure, enthalpy, and more.
+- **Refactored Codebase**:
+  - Modularized structure for easier maintenance and extensibility.
+
+---
 
 ## Features
 
-- **Thermodynamic Properties**:
-  - Specific heat (\( C_p, C_v \)), enthalpy, entropy, and \(\gamma\) for real and humid air.
-- **Transport Properties**:
-  - Viscosity and thermal conductivity calculations using empirical and theoretical models.
-- **Equations of State**:
-  - Support for Redlich-Kwong and Peng-Robinson EOS.
-- **Modular Design**:
-  - Organized codebase with dedicated modules for each property.
-- **Utility Functions**:
-  - Helper functions for handling gas constants and property lookups.
+### The `GasProperties` Class
+- **Dynamic Property Calculations**:
+  - Specific Heat: \( C_p, C_v \)
+  - Density: \( \rho \)
+  - Dynamic Viscosity: \( \mu \)
+  - Enthalpy: \( h \)
+  - Entropy: \( s \)
+  - Heat Capacity Ratio: \( \gamma \)
+  - Thermal Conductivity: \( \lambda \)
+- **Update Conditions Dynamically**:
+  - Change temperature, pressure, or relative humidity without reinitialization.
+- **Unit Conversion**:
+  - Flexible input and output unit handling for consistent results.
+
+---
 
 ## Installation
 
@@ -50,54 +60,70 @@ pip install gasoptics
    pip install .
    ```
 
+---
+
 ## Requirements
 
 - Python 3.x
 - NumPy
-- Matplotlib
+
+---
 
 ## Usage
 
-### Example: Calculating Thermodynamic Properties
+### Using `GasProperties`
+
+The `GasProperties` class provides a convenient interface to calculate various thermodynamic and transport properties of gases.
+
+#### Example 1: Basic Usage
 ```python
-from gasoptics.thermodynamics import calculate_cp, calculate_cv, calculate_gamma
-from gasoptics.transport import calculate_dynamic_viscosity
+from gasoptics.properties import GasProperties
 
-# Define conditions
-T = 300  # Temperature in Kelvin
-P = 101325  # Pressure in Pascals
-RH = 0.5  # Relative Humidity (50%)
+# Set global units
+GasProperties.set_unit(T="C", p="bar", h="kJ")
 
-# Calculate specific heat at constant pressure
-cp = calculate_cp(T, P, RH=RH)
-print(f"Specific Heat (Cp): {cp} J/kg·K")
+# Create a GasProperties instance
+props = GasProperties(T=25, p=1, RH=0.5, T_unit="C")  # 25°C, 1 bar, 50% RH
 
-# Calculate specific heat at constant volume
-cv = calculate_cv(T, P, RH=RH)
-print(f"Specific Heat (Cv): {cv} J/kg·K")
+# Calculate properties
+cp = props.cp()
+rho = props.rho()
+mu = props.mu()
 
-# Calculate ratio of specific heats (gamma)
-gamma = calculate_gamma(T, P, RH=RH)
-print(f"Gamma (Cp/Cv): {gamma}")
-
-# Calculate dynamic viscosity
-mu = calculate_dynamic_viscosity(T, P)
-print(f"Dynamic Viscosity: {mu} Pa·s")
+print(f"Specific Heat (cp): {cp:.2f} kJ/kg·K")
+print(f"Density (rho): {rho:.3f} kg/m³")
+print(f"Viscosity (mu): {mu:.6f} Pa·s")
 ```
 
-### Example: Calculating Density
+#### Example 2: Dynamic Updates
 ```python
-from gasoptics.thermodynamics import calculate_density
+# Update conditions dynamically
+props.update_conditions(T=30, p=1.5, RH=0.6, T_unit="C")
 
-# Conditions
-T = 300  # Kelvin
-P = 101325  # Pascals
-RH = 0.8  # Relative Humidity (80%)
+# Recalculate properties
+cp_updated = props.cp()
+rho_updated = props.rho()
 
-# Calculate density for humid air
-rho = calculate_density(T, P, RH=RH)
-print(f"Density of Humid Air: {rho:.3f} kg/m³")
+print(f"Updated Specific Heat (cp): {cp_updated:.2f} kJ/kg·K")
+print(f"Updated Density (rho): {rho_updated:.3f} kg/m³")
 ```
+
+---
+
+## Available Methods in `GasProperties`
+
+| Method  | Description                              |
+|---------|------------------------------------------|
+| `cp()`  | Specific heat at constant pressure (\( C_p \)). |
+| `cv()`  | Specific heat at constant volume (\( C_v \)).  |
+| `rho()` | Density (\( \rho \)).                    |
+| `h()`   | Enthalpy (\( h \)).                      |
+| `s()`   | Entropy (\( s \)).                       |
+| `gamma()` | Heat capacity ratio (\( \gamma \)).     |
+| `k()`   | Thermal conductivity (\( \lambda \)).    |
+| `mu()`  | Dynamic viscosity (\( \mu \)).           |
+
+---
 
 ## Tests
 
@@ -105,6 +131,8 @@ Run the test suite to validate functionality:
 ```bash
 pytest tests/
 ```
+
+---
 
 ## Contributing
 
@@ -123,6 +151,8 @@ Contributions are welcome! Follow these steps to contribute:
    git push origin feature/your-feature
    ```
 5. Submit a pull request.
+
+---
 
 ## License
 

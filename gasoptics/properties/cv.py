@@ -2,7 +2,7 @@ import json
 import os
 import math
 from ..backends.redlich_kwong import calculate_redlich_kwong_Z
-from .cp import calculate_specific_heat_cp
+from ..properties.cp import calculate_specific_heat_cp
 
 # Path to the fluids folder containing gas-specific JSON files
 FLUIDS_FOLDER = os.path.join(os.path.dirname(__file__), "..", "fluids")
