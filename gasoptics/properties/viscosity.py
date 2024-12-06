@@ -1,5 +1,5 @@
 import math
-from properties.gas_constant import load_gas_properties
+from .gas_constant import load_gas_properties
 
 def calculate_dynamic_viscosity(T, P=None, gas="air"):
     """

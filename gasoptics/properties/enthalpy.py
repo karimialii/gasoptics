@@ -1,6 +1,6 @@
-from properties.cp import calculate_cp
-from properties.cv import calculate_cv
-from properties.cv import calculate_humidity_ratio
+from .cp import calculate_cp
+from .cv import calculate_cv
+from .cv import calculate_humidity_ratio
 
 def calculate_enthalpy(T, P, gas="air", RH=0):
     """

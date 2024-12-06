@@ -4,11 +4,15 @@ with open('README.md', 'r', encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='Gasoptics_ali91en',
-    version='0.1.0',
+    name='gasoptics',
+    version='0.2.0',
     packages=find_packages(),
+    include_package_data=True,  
+    package_data={
+        "gasoptics.fluids": ["*.json"],  
+    },
     install_requires=[
-        'numpy',
+        "numpy",
     ],
     author='Ali Karimi',
     author_email='karimi1991ali@gmail.com',

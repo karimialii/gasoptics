@@ -1,7 +1,7 @@
 import math
-from properties.gas_constant import calculate_specific_gas_constant
-from properties.cv import calculate_humidity_ratio
-from backends.redlich_kwong import calculate_redlich_kwong_Z
+from .gas_constant import calculate_specific_gas_constant
+from .cv import calculate_humidity_ratio
+from ..backends.redlich_kwong import calculate_redlich_kwong_Z
 
 def calculate_density(T, P, gas="air", RH=0):
     """

@@ -1,8 +1,8 @@
 import math
-from properties.cp import calculate_cp
-from properties.cv import calculate_humidity_ratio
-from properties.gas_constant import calculate_specific_gas_constant
-from backends.redlich_kwong import calculate_redlich_kwong_Z
+from .cp import calculate_cp
+from .cv import calculate_humidity_ratio
+from .gas_constant import calculate_specific_gas_constant
+from ..backends.redlich_kwong import calculate_redlich_kwong_Z
 
 def calculate_entropy(T, P, gas="air", RH=0, reference_T=273.15):
     """

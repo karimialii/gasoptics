@@ -1,5 +1,5 @@
-from properties.cp import calculate_cp
-from properties.cv import calculate_cv
+from .cp import calculate_cp
+from .cv import calculate_cv
 
 def calculate_gamma(T, P, gas="air", RH=0):
     """
